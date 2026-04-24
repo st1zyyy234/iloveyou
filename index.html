@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart of Love</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a; /* Темный фон для лучшего свечения */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+        }
+
+        .love-text {
+            position: absolute;
+            color: #ffb6c1; /* Нежно-розовый */
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-transform: uppercase;
+            /* Эффект нежного свечения */
+            text-shadow: 
+                0 0 5px #ffb6c1,
+                0 0 10px #ffb6c1,
+                0 0 20px #ff8da1;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        /* Анимация легкого пульсирования */
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-container" id="heart"></div>
+
+    <script>
+        const container = document.getElementById('heart');
+        const totalElements = 150; // Количество надписей
+
+        for (let i = 0; i < totalElements; i++) {
+            const span = document.createElement('span');
+            span.innerText = 'i love you';
+            span.className = 'love-text';
+
+            // Математическая формула сердца
+            const t = (i / totalElements) * 2 * Math.PI;
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+            // Масштабируем и центрируем
+            const scale = 15; 
+            const left = x * scale + 300;
+            const top = y * scale + 300;
+
+            span.style.left = left + 'px';
+            span.style.top = top + 'px';
+            
+            // Добавляем небольшую случайную задержку анимации для естественности
+            span.style.animationDelay = Math.random() * 2 + 's';
+            
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
